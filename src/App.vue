@@ -8,13 +8,27 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      socket: undefined
+    }
+  },
+  mounted() {
+    // this.socket = new this.$root.plugins[0]('BNBBTC')
+    console.log(this.socket)
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #396897;
 }
 #nav {
   padding: 30px;
