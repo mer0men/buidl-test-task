@@ -5,7 +5,7 @@ export default class ESBus {
 
   emit (eventName, data) {
     const event = this.events[eventName]
-    console.log('from emitter:',data)
+    console.log('from emitter:', data)
     if (event) {
       event.forEach(fn => {
         fn.call(null, data)

@@ -2,11 +2,14 @@ export default class Binance {
   constructor (symbol, emitter) {
     this.symbol = symbol
     this.emitter = emitter
+    this.initSocket(symbol)
+  }
+
+  initSocket (symbol) {
+    if (this.socket)
+      this.socket.close()
+
     this.socket = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@depth`)
-    this.socket.onopen = () => {
-      console.log('Connected')
-      this.emitter.emit('connectionOpend', null)
-    }
 
     this.socket.onmessage = (msg) => {
       let data = JSON.parse(msg.data)
@@ -23,11 +26,11 @@ export default class Binance {
       console.log('ERROR:', err)
       this.emitter.emit('error', err)
     }
-  }
+  } 
 
   changeSymbol (symbol) {
     this.symbol = symbol
-    this.socket = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@depth`)
+    this.initSocket(symbol)    
     this.emitter.emit('symbolChanged', symbol)
   }
 
