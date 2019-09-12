@@ -1,25 +1,26 @@
 export default class ESBus {
-  constructor() {
-    this.events = {};
+  constructor () {
+    this.events = {}
   }
-  
-  emit(eventName, data) {
-    const event = this.events[eventName];
-    if( event ) {
+
+  emit (eventName, data) {
+    const event = this.events[eventName]
+    console.log('from emitter:',data)
+    if (event) {
       event.forEach(fn => {
-        fn.call(null, data);
-      });
+        fn.call(null, data)
+      })
     }
   }
-  
-  subscribe(eventName, fn) {
-    if(!this.events[eventName]) {
-      this.events[eventName] = [];
+
+  subscribe (eventName, fn) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = []
     }
-    
-    this.events[eventName].push(fn);
+
+    this.events[eventName].push(fn)
     return () => {
-      this.events[eventName] = this.events[eventName].filter(eventFn => fn !== eventFn);
+      this.events[eventName] = this.events[eventName].filter(eventFn => fn !== eventFn)
     }
   }
 }

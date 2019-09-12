@@ -10,14 +10,10 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       socket: undefined
     }
-  },
-  mounted() {
-    // this.socket = new this.$root.plugins[0]('BNBBTC')
-    console.log(this.socket)
   }
 }
 </script>

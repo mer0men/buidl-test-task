@@ -2,20 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import ESBus from './plugins/esbus'
-export const bus = new ESBus()
 import Binance from './plugins/binance'
+export const bus = new ESBus()
 
-
-console.log(bus)
-// Vue.use(binance)
-
-const sk = new Binance('BNBBTC')
+const emitter = new ESBus()
+const ws = new Binance('BNBBTC', emitter)
 
 Vue.config.productionTip = false
 new Vue({
   router,
   data: {
-    plugins: [Binance]
+    plugins: [ws]
   },
   render: h => h(App)
 }).$mount('#app')
